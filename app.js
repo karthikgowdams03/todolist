@@ -6,43 +6,43 @@ const _ =require('lodash');
 const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.static("public"));
-// mongoose.connect('mongodb+srv://karthikgowdams27:test123@cluster-todolist.6lrdlcq.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true })
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
+mongoose.connect('mongodb+srv://karthikgowdams27:test123@cluster-todolist.6lrdlcq.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true })
 
 
-// // Items Schema And Model
-// const itemSchema = new mongoose.Schema({
-//     name: String
-// });
+// Items Schema And Model
+const itemSchema = new mongoose.Schema({
+    name: String
+});
 
 
-// const Item = mongoose.model('Item', itemSchema);
+const Item = mongoose.model('Item', itemSchema);
 
-// const item1 = new Item({
-//     name: 'welcome to todolist!'
-// });
+const item1 = new Item({
+    name: 'welcome to todolist!'
+});
 
-// const item2 = new Item({
-//     name: 'save using + button'
-// });
+const item2 = new Item({
+    name: 'save using + button'
+});
 
-// const item3 = new Item({
-//     name: '<-- hit this to delete an item'
-// });
+const item3 = new Item({
+    name: '<-- hit this to delete an item'
+});
 
-// const defaultItems = [item1, item2, item3];
+const defaultItems = [item1, item2, item3];
 
 
-// // List Schema
-// const listSchema = new mongoose.Schema({
-//     name: String,
-//     items: [itemSchema]
-// });
+// List Schema
+const listSchema = new mongoose.Schema({
+    name: String,
+    items: [itemSchema]
+});
 
-// const List = mongoose.model('List', listSchema);
+const List = mongoose.model('List', listSchema);
 
-// // async callback because find is asynchronous function
+// async callback because find is asynchronous function
 // app.get('/', async (req, res) => {
 
 //     const data = await Item.find({});
