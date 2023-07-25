@@ -57,28 +57,28 @@ app.get('/', async (req, res) => {
 });
 
 
-app.post('/', async (req, res) => {
-    const listname=req.body.list;
+// app.post('/', async (req, res) => {
+//     const listname=req.body.list;
     
-    // console.log(listname);
+//     // console.log(listname);
 
-    const itemName = req.body.newitem;
-    const item = new Item({
-        name: itemName
-    });
+//     const itemName = req.body.newitem;
+//     const item = new Item({
+//         name: itemName
+//     });
 
-    if(listname==="Today")
-    {
-        await item.save();
-        res.redirect('/');
-    }
-    else{
-       const found=await List.findOne({name:listname}).exec();
-       found.items.push(item);
-       found.save();
-       res.redirect('/'+listname);
-    }
-});
+//     if(listname==="Today")
+//     {
+//         await item.save();
+//         res.redirect('/');
+//     }
+//     else{
+//        const found=await List.findOne({name:listname}).exec();
+//        found.items.push(item);
+//        found.save();
+//        res.redirect('/'+listname);
+//     }
+// });
 
 // app.get('/:ListName', async (req, res) => {
 //     const ListName = _.capitalize(req.params.ListName);
