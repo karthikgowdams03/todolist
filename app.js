@@ -43,42 +43,42 @@ const listSchema = new mongoose.Schema({
 const List = mongoose.model('List', listSchema);
 
 // async callback because find is asynchronous function
-// app.get('/', async (req, res) => {
+app.get('/', async (req, res) => {
 
-//     const data = await Item.find({});
-//     if (data.length === 0) {
-//         Item.insertMany(defaultItems);
-//         res.redirect('/');
-//     }
-//     else {
-//         res.render('list', { listTitle: 'Today', newitem: data }); // {ejs:js}
-//     }
-//     // console.log(data);
-// });
+    const data = await Item.find({});
+    if (data.length === 0) {
+        Item.insertMany(defaultItems);
+        res.redirect('/');
+    }
+    else {
+        res.render('list', { listTitle: 'Today', newitem: data }); // {ejs:js}
+    }
+    // console.log(data);
+});
 
 
-// app.post('/', async (req, res) => {
-//     const listname=req.body.list;
+app.post('/', async (req, res) => {
+    const listname=req.body.list;
     
-//     // console.log(listname);
+    // console.log(listname);
 
-//     const itemName = req.body.newitem;
-//     const item = new Item({
-//         name: itemName
-//     });
+    const itemName = req.body.newitem;
+    const item = new Item({
+        name: itemName
+    });
 
-//     if(listname==="Today")
-//     {
-//         await item.save();
-//         res.redirect('/');
-//     }
-//     else{
-//        const found=await List.findOne({name:listname}).exec();
-//        found.items.push(item);
-//        found.save();
-//        res.redirect('/'+listname);
-//     }
-// });
+    if(listname==="Today")
+    {
+        await item.save();
+        res.redirect('/');
+    }
+    else{
+       const found=await List.findOne({name:listname}).exec();
+       found.items.push(item);
+       found.save();
+       res.redirect('/'+listname);
+    }
+});
 
 // app.get('/:ListName', async (req, res) => {
 //     const ListName = _.capitalize(req.params.ListName);
@@ -120,13 +120,11 @@ const List = mongoose.model('List', listSchema);
     
 // });
 
-// app.get("/about", (req, res) => {
-//     res.render('about');
-// });
+app.get("/about", (req, res) => {
+    res.render('about');
+});
 
-app.get('/',(req,res)=>{
-    res.send("hello");
-})
+
 
 app.listen(port, () => {
     console.log(`listening at port ${port}`);
