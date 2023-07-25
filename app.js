@@ -57,68 +57,68 @@ app.get('/', async (req, res) => {
 });
 
 
-// app.post('/', async (req, res) => {
-//     const listname=req.body.list;
+app.post('/', async (req, res) => {
+    const listname=req.body.list;
     
-//     // console.log(listname);
+    // console.log(listname);
 
-//     const itemName = req.body.newitem;
-//     const item = new Item({
-//         name: itemName
-//     });
+    const itemName = req.body.newitem;
+    const item = new Item({
+        name: itemName
+    });
 
-//     if(listname==="Today")
-//     {
-//         await item.save();
-//         res.redirect('/');
-//     }
-//     else{
-//        const found=await List.findOne({name:listname}).exec();
-//        found.items.push(item);
-//        found.save();
-//        res.redirect('/'+listname);
-//     }
-// });
+    if(listname==="Today")
+    {
+        await item.save();
+        res.redirect('/');
+    }
+    else{
+       const found=await List.findOne({name:listname}).exec();
+       found.items.push(item);
+       found.save();
+       res.redirect('/'+listname);
+    }
+});
 
-// app.get('/:ListName', async (req, res) => {
-//     const ListName = _.capitalize(req.params.ListName);
-//     // console.log(ListName);
+app.get('/:ListName', async (req, res) => {
+    const ListName = _.capitalize(req.params.ListName);
+    // console.log(ListName);
 
-//     const found=await List.findOne({name:ListName}).exec();
-//     // console.log(typeof(found));
-//     if (!found) {
-//         // console.log("doesn't exists");
-//         const list = new List({
-//             name: ListName,
-//             items: defaultItems
-//         });
-//         list.save();
-//         res.redirect('/'+ListName);
-//     }
-//     else{
-//         // console.log("exists");
-//         res.render('List',{listTitle:found.name,newitem:found.items});  
-//     }
-// });
+    const found=await List.findOne({name:ListName}).exec();
+    // console.log(typeof(found));
+    if (!found) {
+        // console.log("doesn't exists");
+        const list = new List({
+            name: ListName,
+            items: defaultItems
+        });
+        list.save();
+        res.redirect('/'+ListName);
+    }
+    else{
+        // console.log("exists");
+        res.render('List',{listTitle:found.name,newitem:found.items});  
+    }
+});
 
-// app.post('/delete', async (req, res) => {
-//    const itemid = req.body.checkbox;
-//    const listname=req.body.listname;
-//     // console.log(listname);
-//    if(listname==="Today")
-//    {
-//     // console.log(itemid);
-//     await Item.findByIdAndRemove(itemid).exec();
-//     res.redirect('/');
-//    }
+app.post('/delete', async (req, res) => {
+   const itemid = req.body.checkbox;
+   const listname=req.body.listname;
+    // console.log(listname);
+   if(listname==="Today")
+   {
+    // console.log(itemid);
+    await Item.findByIdAndRemove(itemid).exec();
+    res.redirect('/');
+   }
 
-//    else{
-//     // console.log(itemid);
-//     await List.findOneAndUpdate({name:listname},{$pull:{items:{_id:itemid}}}).exec();
-//     res.redirect('/'+listname);
-//    }
+   else{
+    // console.log(itemid);
+    await List.findOneAndUpdate({name:listname},{$pull:{items:{_id:itemid}}}).exec();
+    res.redirect('/'+listname);
+   }
     
-// });
+});
 
 app.get("/about", (req, res) => {
     res.render('about');
